@@ -1,32 +1,32 @@
 #define _CRT_SECURE_NO_WARNINGS
-
 #include <string.h> 
 #include <stdbool.h>
 #include <locale.h>
 #include <stdio.h>
 /*подключаемые заголовочные файлы*/
+
 #define ROW 6
 #define COL 10
-/*константы для настройки работы приложения*/
+/*размеры игрового поля*/
 
-int load_file(int array[ROW - 1][COL]);
-void draw_screen(int game_tablet[ROW][COL], int, int);
-void answer_peak(int gametablet[ROW][COL]);
+int load_file(int array[ROW - 1][COL]); /*загрузка поля из файла*/
+void draw_screen(int game_tablet[ROW][COL], int, int); /*выгрузка поля на экран*/
+void answer_peak(int gametablet[ROW][COL]); /*выбор ответа пользователем*/
 
-void finish_flag_easy();
-void finish_flag_normal();
-void finish_flag_hard();
+void finish_flag_easy(); /*выбор поля, уровень сложности: лёгкий*/
+void finish_flag_normal(); /*выбор поля, уровень сложности: средний*/
+void finish_flag_hard(); /*выбор поля, уровень сложности: сложный*/
 
-void choose_path();
-void menu_peak();
+void choose_path(); /*выбор пунктов в меню*/
+void menu_peak(); /*вывод меню*/
 
-int main()
+int main() /*основная функция*/
 {
     setlocale(LC_ALL, "RUS");
     menu_peak();
 }
 
-
+/*выгрузка поля на экран*/
 void draw_screen(int game_tablet[ROW][COL], int height, int width) {
 
     for (int c = 0; c < width; c++) {
@@ -51,6 +51,7 @@ void draw_screen(int game_tablet[ROW][COL], int height, int width) {
     }
 }
 
+/*загрузка поля из файла*/
 int load_file(int array[ROW - 1][COL]) {
 
     int task_num = 1;
@@ -78,7 +79,7 @@ int load_file(int array[ROW - 1][COL]) {
 void answer_peak(int gametablet[ROW][COL]) {
     int cord_i, cord_j, rez_num;
     int checker_array[ROW - 1][COL];
-    load_file(checker_array);
+    load_file(checker_array); /*загрузка игрового поля из файла*/
 
     printf("\n");
     printf("Выберите координату X (0-9): ");
@@ -89,9 +90,9 @@ void answer_peak(int gametablet[ROW][COL]) {
     scanf("%d", &cord_i);
     getchar();
 
-    switch (cord_i)
+    switch (cord_i) /*поиск по координате Y*/
     {
-    case 0:
+    case 0: 
         printf("Выберите число, которое хотите вставить: ");
         scanf("%d", &rez_num);
         getchar();
@@ -157,6 +158,7 @@ void answer_peak(int gametablet[ROW][COL]) {
     }
 }
 
+/*игра, уровень сложности: лёгкий*/
 void finish_flag_easy() {
 
     int game_tablet[ROW][COL] = {
@@ -202,6 +204,7 @@ void finish_flag_easy() {
     }
 }
 
+/*игра, уровень сложности: средний*/
 void finish_flag_normal() {
 
     int game_tablet[ROW][COL] = {
@@ -217,7 +220,8 @@ void finish_flag_normal() {
     load_file(final_checker);
 
     int game_over = 0;
-
+    
+    /*проверка выигрыша*/
     while (game_over != 1) {
         int flag = 0;
 
@@ -247,6 +251,7 @@ void finish_flag_normal() {
     }
 }
 
+/*игра, уровень сложности: сложный*/
 void finish_flag_hard() {
 
     int game_tablet[ROW][COL] = {
@@ -292,6 +297,7 @@ void finish_flag_hard() {
     }
 }
 
+/*меню: выбор сложности*/
 void choose_path() {
     int menu_rez;
     scanf("%d", &menu_rez);
@@ -341,6 +347,8 @@ void choose_path() {
     }
 
 }
+
+/*основное меню*/
 void menu_peak() {
 
     printf("Игра ЧИСЛОБУС\n\n");
