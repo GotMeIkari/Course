@@ -15,7 +15,7 @@ void answer_peak(int gametablet[ROW][COL]); /*выбор ответа польз
 
 void finish_flag_easy(); /*выбор поля, уровень сложности: лёгкий*/
 void finish_flag_normal(); /*выбор поля, уровень сложности: средний*/
-void finish_flag_hard(); /*выбор поля, уровень сложности: сложный*/
+void finish_flag_hard(); /*выбор поля, уровень сложности: тяжёлый*/
 
 void choose_path(); /*выбор пунктов в меню*/
 void menu_peak(); /*вывод меню*/
