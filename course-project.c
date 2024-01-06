@@ -87,72 +87,19 @@ void answer_peak(int gametablet[ROW][COL]) {
     scanf("%d", &cord_i);
     getchar();
 
-    switch (cord_i) /*поиск по координате Y*/
-    {
-    case 0: 
-        printf("Выберите число, которое хотите вставить: ");
-        scanf("%d", &rez_num);
-        getchar();
-        if (rez_num == checker_array[cord_i][cord_j]) {
-            gametablet[cord_i][cord_j] = rez_num;
-        }
-        else {
-            printf("Число неверное, попробуйте ещё раз!\n\n");
-        }
-        break;
-
-    case 1:
-        printf("Выберите число, которое хотите вставить: ");
-        scanf("%d", &rez_num);
-        getchar();
-        if (rez_num == checker_array[cord_i][cord_j]) {
-            gametablet[cord_i][cord_j] = rez_num;
-        }
-        else {
-            printf("Число неверное, попробуйте ещё раз!\n\n");
-        }
-        break;
-
-    case 2:
-        printf("Выберите число, которое хотите вставить: ");
-        scanf("%d", &rez_num);
-        getchar();
-        if (rez_num == checker_array[cord_i][cord_j]) {
-            gametablet[cord_i][cord_j] = rez_num;
-        }
-        else {
-            printf("Число неверное, попробуйте ещё раз!\n\n");
-        }
-        break;
-
-    case 3:
-        printf("Выберите число, которое хотите вставить: ");
-        scanf("%d", &rez_num);
-        getchar();
-        if (rez_num == checker_array[cord_i][cord_j]) {
-            gametablet[cord_i][cord_j] = rez_num;
-        }
-        else {
-            printf("Число неверное, попробуйте ещё раз!\n\n");
-        }
-        break;
-
-    case 4:
-        printf("Выберите число, которое хотите вставить: ");
-        scanf("%d", &rez_num);
-        getchar();
-        if (rez_num == checker_array[cord_i][cord_j]) {
-            gametablet[cord_i][cord_j] = rez_num;
-        }
-        else {
-            printf("Число неверное, попробуйте ещё раз!\n\n");
-        }
-        break;
-
-    default:
-        printf("Координата не входит в диапазон!\n\n");
-        break;
+    if (0 <= cord_i <= 9)  {
+        if (0 <= cord_i <= 4) {
+            printf("Выберите число, которое хотите вставить: ");
+            scanf("%d", &rez_num);
+            getchar();
+            if (rez_num == checker_array[cord_i][cord_j]) {
+                gametablet[cord_i][cord_j] = rez_num;
+            }
+        else printf("Число неверное, попробуйте ещё раз!\n\n");
+        } 
+        else printf("Координата не входит в диапазон!\n\n");
     }
+    else printf("Координата не входит в диапазон!\n\n");
 }
 
 /*игра, уровень сложности*/
