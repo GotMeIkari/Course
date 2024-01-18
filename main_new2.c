@@ -12,7 +12,9 @@
 int menu_organizer(int players_choice);
 int choose_difficulty(int difficulty);
 char draw_screen(char game_tablet[ROW][COLUMN]);
+char enter_number(char arr[ROW][COLUMN]);
 
+int ultimate_check();
 int check_row();
 int check_corner();
 int check_side();
@@ -157,4 +159,36 @@ char draw_screen(char game_tablet[ROW][COLUMN]) {
     }
     printf("|");
     return 0;
+}
+
+char enter_number(char arr[ROW][COLUMN]) {
+    int cord_i, cord_j;
+    char buffer_number;
+
+    printf("\n");
+    printf("Выберите координату X (0-9): ");
+    scanf("%d", &cord_j);
+    getchar();
+
+    printf("Выберите координату Y (0-4): ");
+    scanf("%d", &cord_i);
+    getchar();
+
+    if ((0 <= cord_j) && (cord_j <= 9))  {
+        if ((0 <= cord_i) && (cord_i <= 4)) {
+            printf("Выберите число, которое хотите вставить: ");
+            scanf("%c", &buffer_number);
+            getchar();
+        } 
+        else {
+            printf("Координата не входит в диапазон!\n\n");
+            return -1;
+        };
+    }
+    else {
+        printf("Координата не входит в диапазон!\n\n");
+        return -1;
+    };
+
+    return buffer_number;
 }
