@@ -19,6 +19,7 @@ int check_result();
 
 int create_array(int*** array);
 int load(int name, int ***array);
+int print_array(int*** array);
 int isFull();
 
 int main() {
@@ -37,6 +38,7 @@ int main() {
 
     int difficulty = menu_organizer(players_choice);
     load(difficulty, &array);
+    print_array(&array); 
     return 0;
 }
 
@@ -49,7 +51,7 @@ int create_array(int*** array) {
 int load(int name, int*** array) {
     char fname[10];
     sprintf(fname, "%d", name);
-    
+
     FILE *file;
     file = fopen(strcat(fname, ".txt"), "r");
 
@@ -59,9 +61,17 @@ int load(int name, int*** array) {
     }
 
     for (int i = 1; i < ROW; i++) {
-        for (int j = 0; j < COLUMN; j++) fscanf(file, "%d ", &array[i][j]);
+        for (int j = 0; j < COLUMN; j++) fscanf(file, "%d ", &(*array)[i][j]);
     }
     fclose(file);
+    return 0;
+}
+
+int print_array(int*** array) {
+    for (int i = 1; i < ROW; i++) {
+        for (int j = 0; j < COLUMN; j++) printf("%d ", (*array)[i][j]);
+        printf("\n");
+    }
     return 0;
 }
 
