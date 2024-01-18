@@ -9,7 +9,6 @@
 
 int menu_organizer(int players_choice);
 int choose_difficulty(int difficulty);
-int* load_difficulty(int meter);
 
 int check_row();
 int check_corner();
@@ -31,9 +30,7 @@ int main() {
     int players_choice;
     scanf("%d", &players_choice);
 
-    menu_organizer(players_choice);
     int difficulty = menu_organizer(players_choice);
-    printf("%d", difficulty);
     return 0;
 }
 
@@ -49,6 +46,7 @@ int menu_organizer(int players_choice) {
         int difficulty;
         scanf("%d", &difficulty);
         return difficulty;
+        break;
     case 2:
         printf("\nЧислобус - головоломка, представляющая собой прямоугольную таблицу из девяти столбцов.\n");
         printf("В некоторых клетках уже стоят цифры от 1 до 9, остальные пусты.\n");
@@ -73,15 +71,12 @@ int menu_organizer(int players_choice) {
 int choose_difficulty(int difficulty) {
         switch (difficulty) {
         case 1:
-            load_difficulty(1);
             return 0;
             break;
         case 2:
-            load_difficulty(2);
             return 0;
             break;
         case 3:
-            load_difficulty(3);
             return 0;
             break;
         default:
