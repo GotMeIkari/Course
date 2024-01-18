@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <locale.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define ROW 6
 #define COLUMN 10
@@ -15,11 +17,14 @@ int check_corner();
 int check_side();
 int check_result();
 
+int create_array(int*** array);
+int load(int name, int ***array);
 int isFull();
-int load();
 
 int main() {
     setlocale(LC_CTYPE, "RUS");
+    int** array;
+    create_array(&array);
 
     printf("Игра ЧИСЛОБУС\n\n");
     printf("Выберите:\n");
@@ -31,6 +36,32 @@ int main() {
     scanf("%d", &players_choice);
 
     int difficulty = menu_organizer(players_choice);
+    load(difficulty, &array);
+    return 0;
+}
+
+
+int create_array(int*** array) {
+    *array = (int**) malloc(ROW * sizeof(int));
+    return 0;
+}
+
+int load(int name, int*** array) {
+    char fname[10];
+    sprintf(fname, "%d", name);
+    
+    FILE *file;
+    file = fopen(strcat(fname, ".txt"), "r");
+
+    if (file == NULL) {
+        printf("Ошибка при открытии файла\n");
+        return -1;
+    }
+
+    for (int i = 1; i < ROW; i++) {
+        for (int j = 0; j < COLUMN; j++) fscanf(file, "%d ", &array[i][j]);
+    }
+    fclose(file);
     return 0;
 }
 
