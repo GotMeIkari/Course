@@ -19,7 +19,7 @@ int check_side();
 int check_result();
 
 char load(int file_type, char arr[ROW][COLUMN]);
-int isFull();
+int isFull(char arr[ROW][COLUMN]);
 
 int main() {
     setlocale(LC_CTYPE, "RUS");
@@ -60,6 +60,17 @@ char load(int file_type, char arr[ROW][COLUMN]) {
     fclose(pf);
     return 0;
 } 
+
+int isFull(char arr[ROW][COLUMN]) {
+    int check;
+    for (int i = 0; i < ROW; i++) {
+        for (int j = 0; j < COLUMN; j++) {
+            if (arr[i][j] == '-') check = -1;
+            else check = 0;
+        }
+    }
+    return check;
+}
 
 int menu_organizer(int players_choice) {
     switch (players_choice) {
