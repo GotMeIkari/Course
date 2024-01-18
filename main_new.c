@@ -32,14 +32,10 @@ int main() {
     int players_choice;
     scanf("%d", &players_choice);
 
-    int difficulty = menu_organizer(players_choice);
-
     char arr[ROW][COLUMN];
+    int difficulty = choose_difficulty(menu_organizer(players_choice));
     load(difficulty, arr);
-    for (int i = 0; i < ROW - 1; i++) {
-        for (int j = 0; j < COLUMN; j++) printf("%c ", arr[i][j]);
-        printf("\n");
-    }
+
     return 0;
 }
 
@@ -99,13 +95,13 @@ int menu_organizer(int players_choice) {
 int choose_difficulty(int difficulty) {
         switch (difficulty) {
         case 1:
-            return 0;
+            return 1;
             break;
         case 2:
-            return 0;
+            return 2;
             break;
         case 3:
-            return 0;
+            return 3;
             break;
         default:
             printf("Ошибка! Неверно введён уровень сложности!");
