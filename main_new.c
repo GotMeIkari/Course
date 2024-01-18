@@ -8,7 +8,6 @@
 
 #define ROW 6
 #define COLUMN 10
-char load_arr(int file_type, char arr[ROW][COLUMN]);
 
 int menu_organizer(int players_choice);
 int choose_difficulty(int difficulty);
@@ -18,17 +17,11 @@ int check_corner();
 int check_side();
 int check_result();
 
-int create_array(int*** array);
-int load(int name, int*** array);
-int print_array(int*** array);
+char load(int file_type, char arr[ROW][COLUMN]);
 int isFull();
 
 int main() {
     setlocale(LC_CTYPE, "RUS");
-    
-    srand(time(NULL));
-    int** array;
-    create_array(&array);
 
     printf("Игра ЧИСЛОБУС\n\n");
     printf("Выберите:\n");
@@ -42,7 +35,7 @@ int main() {
     int difficulty = menu_organizer(players_choice);
 
     char arr[ROW][COLUMN];
-    load_arr(1, arr);
+    load(difficulty, arr);
     for (int i = 0; i < ROW - 1; i++) {
         for (int j = 0; j < COLUMN; j++) printf("%c ", arr[i][j]);
         printf("\n");
@@ -50,7 +43,7 @@ int main() {
     return 0;
 }
 
-char load_arr(int file_type, char arr[ROW][COLUMN]) {
+char load(int file_type, char arr[ROW][COLUMN]) {
     char fname[10];
     sprintf(fname, "%d", file_type);
 
@@ -68,38 +61,6 @@ char load_arr(int file_type, char arr[ROW][COLUMN]) {
     fclose(pf);
     return 0;
 } 
-
-int create_array(int*** array) {
-    *array = (int**) malloc(ROW * sizeof(int));
-    return 0;
-}
-
-int load(int name, int*** array) {
-    char fname[10];
-    sprintf(fname, "%d", name);
-
-    FILE *pf;
-    pf = fopen(strcat(fname, ".txt"), "r");
-
-    if (pf == NULL) {
-        printf("Ошибка при открытии файла\n");
-        return -1;
-    }
-
-    for (int i = 0; i < ROW - 1; i++) {
-        for (int j = 0; j < COLUMN; j++) fscanf(pf, "%d ", &(*array)[i][j]);
-    }
-    fclose(pf);
-    return 0;
-}
-
-int print_array(int*** array) {
-    for (int i = 0; i < ROW; i++) {
-        for (int j = 0; j < COLUMN; j++) printf("%d ", (*array)[i][j]);
-        printf("\n");
-    }
-    return 0;
-}
 
 int menu_organizer(int players_choice) {
     switch (players_choice) {
