@@ -247,7 +247,7 @@ int check_row(char arr[ROW][COLUMN]) {
     int check = 0;
     for (int i = 0; i < 1; i++) {
         for (int j = 0; j < COLUMN; j++) {
-            if ((arr[i][j] == arr[i][j + 1]) && (arr[i][j] != a[0])) check++;
+            if ((arr[i][0] == arr[i][j + 1]) && (arr[i][j] != a[0])) check++;
         }
     }
     if (check == 0) return 0;
