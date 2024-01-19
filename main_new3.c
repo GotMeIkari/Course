@@ -68,23 +68,27 @@ char load(int file_type, char arr[ROW][COLUMN]) {
 
 
 int isFull(char arr[ROW][COLUMN]) {
-    int check;
+    int check = 0;
     for (int i = 0; i < ROW; i++) {
         for (int j = 0; j < COLUMN; j++) {
-            if (arr[i][j] == '-') check = -1;
-            else check = 0;
+            if (arr[i][j] == '-') {
+                check = -1;
+                break;
+            };
         }
     }
-    return check;
+    if (check == 0) return 0;
+    else return -1;
 }
 
 int gameplay(int access, char arr[ROW][COLUMN]) {
     int check = isFull(arr);
     if (check == -1) {
         int default_arr[3];
-        
+
         draw_screen(arr);
         enter_number(default_arr);
+        for (int i = 0; i < 3; i++) printf("%d ", default_arr[i]);
     }
 
     return 0;
