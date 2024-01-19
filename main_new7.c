@@ -238,7 +238,7 @@ int check_all(int access, char arr[ROW][COLUMN], char array[3]) {
     s2 = check_side(arr);
     s3 = check_corner(arr);
     access = s1 + s2 + s3;
-    if (access == 0) return access;
+    if (access == 0) return 0;
     else return access;
 }
 
