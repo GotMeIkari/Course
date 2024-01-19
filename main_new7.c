@@ -12,7 +12,7 @@
 int menu_organizer(int players_choice);
 int choose_difficulty(int difficulty);
 char draw_screen(char game_tablet[ROW][COLUMN]);
-char enter_number(char defaut_arr[3]);
+char enter_number(char default_arr[3]);
 
 int check_all(int access, char arr[ROW][COLUMN], char array[3]);
 int check_row(char arr[ROW][COLUMN]);
