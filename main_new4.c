@@ -12,9 +12,9 @@
 int menu_organizer(int players_choice);
 int choose_difficulty(int difficulty);
 char draw_screen(char game_tablet[ROW][COLUMN]);
-int enter_number(int defaut_arr[3]);
+char enter_number(char defaut_arr[3]);
 
-int ultimate_check();
+int ultimate_check(int access);
 int check_row();
 int check_corner();
 int check_side();
@@ -22,7 +22,7 @@ int check_result();
 
 char load(int file_type, char arr[ROW][COLUMN]);
 int isFull(char arr[ROW][COLUMN]);
-int gameplay(int access, char arr[ROW][COLUMN]);
+char gameplay(char arr[ROW][COLUMN]);
 
 
 int main() {
@@ -42,8 +42,7 @@ int main() {
     int difficulty = choose_difficulty(menu_organizer(players_choice));
     load(difficulty, arr);
 
-    gameplay(difficulty, arr);
-
+    gameplay(arr);
     return 0;
 }
 
@@ -81,16 +80,35 @@ int isFull(char arr[ROW][COLUMN]) {
     else return -1;
 }
 
-int gameplay(int access, char arr[ROW][COLUMN]) {
-    int check = isFull(arr);
-    if (check == -1) {
-        int default_arr[3];
+char gameplay(char arr[ROW][COLUMN]) {
 
-        draw_screen(arr);
-        enter_number(default_arr);
-        for (int i = 0; i < 3; i++) printf("%d ", default_arr[i]);
+    char new_array[ROW][COLUMN];
+    for (int i = 0; i < ROW - 1; i++) {
+        for (int j = 0; j < COLUMN; j++) {
+            new_array[i][j] = arr[i][j];
+        }
     }
 
+    int check = isFull(new_array);
+    if (check == -1) {
+        char default_arr[3];
+
+        draw_screen(new_array);
+        enter_number(default_arr);
+        
+        new_array[(int)default_arr[1]][(int)default_arr[0]] = default_arr[2];
+
+        printf("\n%c\n%c\n", new_array[(int)default_arr[1]][(int)default_arr[0]], new_array[0][1]);
+        for (int i = 0; i < ROW - 1; i++) {
+            for (int j = 0; j < COLUMN; j++) {
+                printf("%c ", new_array[i][j]);
+            }
+            printf("\n");
+        }
+        return -1;
+    }
+    else printf("\n\tВы выйграли! Поздравляем!");
+    
     return 0;
 }
 
@@ -181,7 +199,7 @@ char draw_screen(char game_tablet[ROW][COLUMN]) {
     return 0;
 }
 
-int enter_number(int default_arr[3]) {
+char enter_number(char default_arr[3]) {
     int cord_i, cord_j;;
 
     printf("\n");
@@ -196,12 +214,12 @@ int enter_number(int default_arr[3]) {
     if ((0 <= cord_j) && (cord_j <= 9))  {
         if ((0 <= cord_i) && (cord_i <= 4)) {
             printf("Выберите число, которое хотите вставить: ");
-            int buffer_number;
-            scanf("%d", &buffer_number);
+            char buffer_number;
+            scanf("%c", &buffer_number);
             getchar();
 
-            default_arr[0] = cord_j;
-            default_arr[1] = cord_i;
+            default_arr[0] = (char)cord_j;
+            default_arr[1] = (char)cord_i;
             default_arr[2] = buffer_number;
             return 0;
         } 
@@ -215,4 +233,8 @@ int enter_number(int default_arr[3]) {
         return -1;
     };
 
+}
+
+int ultimate_check(int access) {
+    return 0;
 }
