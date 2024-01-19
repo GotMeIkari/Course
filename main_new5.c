@@ -14,11 +14,10 @@ int choose_difficulty(int difficulty);
 char draw_screen(char game_tablet[ROW][COLUMN]);
 char enter_number(char defaut_arr[3]);
 
-int ultimate_check(int access);
-int check_row();
-int check_corner();
-int check_side();
-int check_result();
+int check_all(int access, char arr[ROW][COLUMN], char array[3]);
+int check_row(char arr[ROW][COLUMN]);
+int check_side(char arr[ROW][COLUMN]);
+int check_corner(char arr[ROW][COLUMN]);
 
 char load(int file_type, char arr[ROW][COLUMN]);
 int isFull(char arr[ROW][COLUMN]);
@@ -89,7 +88,7 @@ char gameplay(char arr[ROW][COLUMN]) {
         draw_screen(arr);
         enter_number(default_arr);
         
-        int default_checker = ultimate_check(0);
+        int default_checker = check_all(0, arr, default_arr);
         if (default_checker == 0) {
             arr[(int)default_arr[1]][(int)default_arr[0]] = default_arr[2];
             gameplay(arr);
@@ -228,6 +227,50 @@ char enter_number(char default_arr[3]) {
 
 }
 
-int ultimate_check(int access) {
-    return 0;
+int check_all(int access, char arr[ROW][COLUMN], char array[3]) {
+    int s1, s2, s3;
+    s1 = check_row(arr);
+    s2 = check_side(arr);
+    s3 = check_corner(arr);
+    access = s1 + s2 + s3;
+    if (access == 0) return 0;
+    else return -1;
+}
+
+int check_row(char arr[ROW][COLUMN]) {
+    int check = 0;
+    for (int i = 0; i < ROW - 1; i++) {
+        for (int j = 0; j < COLUMN; j++) {
+            if (arr[i][j] == arr[i][j + 1]) check++;
+        }
+    }
+    if (check == 0) return 0;
+    else return 1;
+}
+
+int check_side(char arr[ROW][COLUMN]) {
+    int check = 0;
+    for (int i = 1; i < ROW - 2; i++) {
+        for (int j = 0; j < COLUMN; j++) {
+            if ((arr[i][j] == arr[i - 1][j]) || (arr[i][j] == arr[i + 1][j])) check++;
+        }
+    }
+    if (check == 0) return 0;
+    else return 1;
+}
+
+int check_corner(char arr[ROW][COLUMN]) {
+    int check = 0;
+    for (int i = 0; i < ROW - 2; i++) {
+        for (int j = 1; j < COLUMN - 1; j++) {
+            if ((arr[i][j] == arr[i + 1][j - 1]) || (arr[i][j] == arr[i + 1][j + 1])) check++;
+        }
+    }
+    for (int i = 1; i < ROW - 1; i++) {
+        for (int j = 1; j < COLUMN - 1; j++) {
+            if ((arr[i][j] == arr[i - 1][j - 1]) || (arr[i][j] == arr[i - 1][j + 1])) check++;
+        }
+    }
+    if (check == 0) return 0;
+    else return 1;
 }
