@@ -12,7 +12,7 @@
 int menu_organizer(int players_choice);
 int choose_difficulty(int difficulty);
 char draw_screen(char game_tablet[ROW][COLUMN]);
-char enter_number(char arr[ROW][COLUMN]);
+int enter_number(int defaut_arr[3]);
 
 int ultimate_check();
 int check_row();
@@ -23,6 +23,7 @@ int check_result();
 char load(int file_type, char arr[ROW][COLUMN]);
 int isFull(char arr[ROW][COLUMN]);
 int gameplay(int access, char arr[ROW][COLUMN]);
+
 
 int main() {
     setlocale(LC_CTYPE, "RUS");
@@ -65,6 +66,7 @@ char load(int file_type, char arr[ROW][COLUMN]) {
     return 0;
 } 
 
+
 int isFull(char arr[ROW][COLUMN]) {
     int check;
     for (int i = 0; i < ROW; i++) {
@@ -79,9 +81,10 @@ int isFull(char arr[ROW][COLUMN]) {
 int gameplay(int access, char arr[ROW][COLUMN]) {
     int check = isFull(arr);
     if (check == -1) {
+        int default_arr[3];
+        
         draw_screen(arr);
-        int buffer_number = enter_number(arr);
-
+        enter_number(default_arr);
     }
 
     return 0;
@@ -174,9 +177,8 @@ char draw_screen(char game_tablet[ROW][COLUMN]) {
     return 0;
 }
 
-char enter_number(char arr[ROW][COLUMN]) {
-    int cord_i, cord_j;
-    char buffer_number;
+int enter_number(int defaut_arr[3]) {
+    int cord_i, cord_j;;
 
     printf("\n");
     printf("Выберите координату X (0-9): ");
@@ -190,8 +192,12 @@ char enter_number(char arr[ROW][COLUMN]) {
     if ((0 <= cord_j) && (cord_j <= 9))  {
         if ((0 <= cord_i) && (cord_i <= 4)) {
             printf("Выберите число, которое хотите вставить: ");
-            scanf("%c", &buffer_number);
+            int buffer_number;
+            scanf("%d", &buffer_number);
             getchar();
+
+            int defaut_arr[3] = {cord_j, cord_i, buffer_number};
+            return 0;
         } 
         else {
             printf("Координата не входит в диапазон!\n\n");
@@ -203,5 +209,4 @@ char enter_number(char arr[ROW][COLUMN]) {
         return -1;
     };
 
-    return buffer_number;
 }
