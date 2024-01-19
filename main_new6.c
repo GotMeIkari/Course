@@ -84,18 +84,22 @@ char gameplay(char arr[ROW][COLUMN]) {
     int check = isFull(arr);
     if (check == -1) {
         char default_arr[3];
+        char tmp[3];
 
         draw_screen(arr);
         enter_number(default_arr);
-        
-        printf("\n%d\n", check_all(0, arr, default_arr));
+        tmp[0] = default_arr[0];
+        tmp[1] = default_arr[1];
+        tmp[2] = arr[(int)default_arr[1]][(int)default_arr[0]];
+
+        arr[(int)default_arr[1]][(int)default_arr[0]] = default_arr[2];
         int default_checker = check_all(0, arr, default_arr);
         if (default_checker == 0) {
-            arr[(int)default_arr[1]][(int)default_arr[0]] = default_arr[2];
             gameplay(arr);
         }
         else {
             printf("Введено неправильное число!\n");
+            arr[(int)tmp[1]][(int)tmp[0]] = tmp[2];
             gameplay(arr);
         }
         return -1;
